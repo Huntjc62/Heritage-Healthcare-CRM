@@ -501,201 +501,186 @@ Role-Based Access System
 
 // =========================================
 // Heritage Healthcare CRM
-// User Accounts
+// Firebase Authentication Login
 // =========================================
 
-const users = [
+// Firebase SDK Imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-    // ==========================
-    // Head Office Administrator
-    // ==========================
+import {
+    getAuth,
+    signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-    {
-        email: "josh@heritagehealthcare.co.uk",
-        password: "password123",
-        role: "admin",
-        office: "All Offices",
-        name: "Josh",
-        redirect: "home.html"
-    },
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-    // ==========================
-    // Franchise Users
-    // ==========================
 
-    {
-        email: "basildon@heritagehealthcare.co.uk",
-        password: "basildon123",
-        role: "franchise",
-        office: "Basildon",
-        name: "Basildon Franchise",
-        redirect: "franchise_home.html"
-    },
+// =========================================
+// YOUR FIREBASE CONFIG
+// Replace this with your own config
+// =========================================
 
-    {
-        email: "birmingham@heritagehealthcare.co.uk",
-        password: "birmingham123",
-        role: "franchise",
-        office: "Birmingham South",
-        name: "Birmingham South",
-        redirect: "franchise_home.html"
-    },
+const firebaseConfig = {
 
-    {
-        email: "bristol@heritagehealthcare.co.uk",
-        password: "bristol123",
-        role: "franchise",
-        office: "Bristol",
-        name: "Bristol Franchise",
-        redirect: "franchise_home.html"
-    },
+    apiKey: "YOUR_API_KEY",
 
-    {
-        email: "cardiff@heritagehealthcare.co.uk",
-        password: "cardiff123",
-        role: "franchise",
-        office: "Cardiff",
-        name: "Cardiff Franchise",
-        redirect: "franchise_home.html"
-    },
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
 
-    {
-        email: "leicester@heritagehealthcare.co.uk",
-        password: "leicester123",
-        role: "franchise",
-        office: "Leicester",
-        name: "Leicester Franchise",
-        redirect: "franchise_home.html"
-    },
+    projectId: "YOUR_PROJECT_ID",
 
-    {
-        email: "miltonkeynes@heritagehealthcare.co.uk",
-        password: "mk123",
-        role: "franchise",
-        office: "Milton Keynes",
-        name: "Milton Keynes",
-        redirect: "franchise_home.html"
-    },
+    storageBucket: "YOUR_PROJECT.appspot.com",
 
-    {
-        email: "wakefield@heritagehealthcare.co.uk",
-        password: "wakefield123",
-        role: "franchise",
-        office: "Wakefield & Kirklees",
-        name: "Wakefield & Kirklees",
-        redirect: "franchise_home.html"
-    },
+    messagingSenderId: "YOUR_SENDER_ID",
 
-    {
-        email: "northtyneside@heritagehealthcare.co.uk",
-        password: "nt123",
-        role: "franchise",
-        office: "North Tyneside & South Northumberland",
-        name: "North Tyneside",
-        redirect: "franchise_home.html"
-    },
+    appId: "YOUR_APP_ID"
 
-    {
-        email: "northeastoffice@heritagehealthcare.co.uk",
-        password: "northeast123",
-        role: "franchise",
-        office: "North East",
-        name: "North East Franchise",
-        redirect: "franchise_home.html"
-    },
+};
 
-    {
-        email: "yorkoffice@heritagehealthcare.co.uk",
-        password: "york123",
-        role: "franchise",
-        office: "York",
-        name: "York Franchise",
-        redirect: "franchise_home.html"
+
+// Initialise Firebase
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+// =========================================
+// Login
+// =========================================
+
+async function login(){
+
+    const email =
+    document.getElementById("email")
+    .value
+    .trim()
+    .toLowerCase();
+
+    const password =
+    document.getElementById("password")
+    .value;
+
+    try{
+
+        // Sign into Firebase
+
+        const result =
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        // Find this user in Firestore
+
+        const q = query(
+
+            collection(db,"users"),
+
+            where("email","==",email)
+
+        );
+
+        const snapshot =
+        await getDocs(q);
+
+        if(snapshot.empty){
+
+            alert("User profile not found.");
+
+            return;
+
+        }
+
+        const user =
+        snapshot.docs[0].data();
+
+        // Store session
+
+        localStorage.setItem("loggedIn","true");
+
+        localStorage.setItem("userEmail",user.email);
+
+        localStorage.setItem("userName",user.name);
+
+        localStorage.setItem("role",user.role);
+
+        localStorage.setItem("office",user.office);
+
+        localStorage.setItem("lastLogin",
+        new Date().toLocaleString("en-GB"));
+
+        // Redirect
+
+        if(user.role==="admin"){
+
+            window.location.href="home.html";
+
+        }
+        else{
+
+            window.location.href="franchise_home.html";
+
+        }
+
     }
 
-];
+    catch(error){
 
-// ---------------------------
-// Login
-// ---------------------------
+        console.log(error);
 
-function login(){
+        document.getElementById("error").style.display="block";
 
-const email =
-document.getElementById("email")
-.value
-.trim()
-.toLowerCase();
-
-const password =
-document.getElementById("password")
-.value;
-
-const user =
-users.find(u =>
-u.email===email &&
-u.password===password
-);
-
-if(user){
-
-localStorage.setItem("loggedIn","true");
-
-localStorage.setItem("userEmail",user.email);
-
-localStorage.setItem("userName",user.name);
-
-localStorage.setItem("role",user.role);
-
-localStorage.setItem("office",user.office);
-
-localStorage.setItem("lastLogin",new Date().toLocaleString("en-GB"));
-
-window.location.href=user.redirect;
-
-}
-else{
-
-document.getElementById("error").style.display="block";
+    }
 
 }
 
-}
 
-// ---------------------------
+// =========================================
 // Press Enter to Login
-// ---------------------------
+// =========================================
 
 document.addEventListener("keydown",function(e){
 
-if(e.key==="Enter"){
+    if(e.key==="Enter"){
 
-login();
+        login();
 
-}
+    }
 
 });
 
-// ---------------------------
-// Auto Redirect if Logged In
-// ---------------------------
+
+// =========================================
+// Auto Redirect
+// =========================================
 
 if(localStorage.getItem("loggedIn")==="true"){
 
-const role=localStorage.getItem("role");
+    const role =
+    localStorage.getItem("role");
 
-if(role==="admin"){
+    if(role==="admin"){
 
-window.location.href="home.html";
+        window.location.href="home.html";
 
-}else{
+    }
+    else{
 
-window.location.href="franchise_home.html";
+        window.location.href="franchise_home.html";
+
+    }
 
 }
-
-}
-
+    
 </script>
 
 </body>
