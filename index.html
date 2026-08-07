@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Heritage Healthcare CRM</title>
+
+<link rel="icon" href="branding/logo.jpg">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(135deg,#003D73 0%,#005C99 50%,#0077C8 100%);
+
+overflow:hidden;
+
+}
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:700px;
+height:700px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:50%;
+
+top:-200px;
+left:-200px;
+
+}
+
+body::after{
+
+content:"";
+
+position:absolute;
+
+width:600px;
+height:600px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:50%;
+
+bottom:-200px;
+right:-150px;
+
+}
+
+.login-card{
+
+position:relative;
+
+z-index:5;
+
+width:440px;
+
+background:white;
+
+border-radius:20px;
+
+padding:50px;
+
+box-shadow:0 30px 70px rgba(0,0,0,.25);
+
+animation:fadeIn .6s ease;
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+.logo{
+
+text-align:center;
+
+margin-bottom:35px;
+
+}
+
+.logo img{
+
+width:230px;
+max-width:100%;
+height:auto;
+
+margin-bottom:20px;
+
+}
+
+.logo h1{
+
+font-size:30px;
+
+color:#004B8D;
+
+margin-bottom:8px;
+
+}
+
+.logo p{
+
+color:#666;
+
+font-size:15px;
+
+}
+
+.input-group{
+
+margin-top:20px;
+
+}
+
+.input-group label{
+
+display:block;
+
+font-size:14px;
+
+font-weight:600;
+
+margin-bottom:8px;
+
+color:#444;
+
+}
+
+.input-group input{
+
+width:100%;
+
+padding:15px;
+
+border:1px solid #d8d8d8;
+
+border-radius:10px;
+
+font-size:15px;
+
+transition:.25s;
+
+}
+
+.input-group input:focus{
+
+outline:none;
+
+border-color:#0077C8;
+
+box-shadow:0 0 0 4px rgba(0,119,200,.15);
+
+}
+
+.options{
+
+margin-top:18px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+font-size:14px;
+
+}
+
+.options a{
+
+text-decoration:none;
+
+color:#0077C8;
+
+}
+
+button{
+
+width:100%;
+
+padding:16px;
+
+margin-top:28px;
+
+background:#0077C8;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+background:#005F9E;
+
+transform:translateY(-2px);
+
+}
+
+#error{
+
+display:none;
+
+margin-top:20px;
+
+padding:12px;
+
+background:#ffe5e5;
+
+color:#b00020;
+
+border-radius:8px;
+
+font-size:14px;
+
+text-align:center;
+
+}
+
+.footer{
+
+margin-top:35px;
+
+text-align:center;
+
+font-size:13px;
+
+color:#888;
+
+}
+
+@media(max-width:600px){
+
+.login-card{
+
+width:92%;
+
+padding:35px;
+
+}
+
+.logo img{
+
+width:180px;
+
+}
+
+.logo h1{
+
+font-size:24px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+<div class="logo">
+
+<img src="branding/logo.jpg" alt="Heritage Healthcare Logo">
+
+<h1>Heritage Healthcare CRM</h1>
+
+<p>Franchisor Administration Portal</p>
+
+</div>
+
+<div class="input-group">
+
+<label>Email Address</label>
+
+<input
+type="email"
+id="email"
+placeholder="josh@heritagehealthcare.co.uk">
+
+</div>
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Enter your password">
+
+</div>
+
+<div class="options">
+
+<label>
+
+<input type="checkbox">
+
+ Remember me
+
+</label>
+
+<a href="#">Forgot password?</a>
+
+</div>
+
+<button onclick="login()">
+
+Sign In
+
+</button>
+
+<div id="error">
+
+Incorrect email or password.
+
+</div>
+
+<div class="footer">
+
+Version 1.0<br>
+
+© 2026 Heritage Healthcare CRM
+
+</div>
+
+</div>
+
+<script>
+
+function login(){
+
+const email=document.getElementById("email").value.trim();
+
+const password=document.getElementById("password").value;
+
+if(
+email==="josh@heritagehealthcare.co.uk" &&
+password==="password123"
+){
+
+window.location.href="home.html";
+
+}else{
+
+document.getElementById("error").style.display="block";
+
+}
+
+}
+
+document.addEventListener("keydown",function(event){
+
+if(event.key==="Enter"){
+
+login();
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
