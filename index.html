@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Heritage Healthcare CRM | Login</title>
@@ -24,7 +26,7 @@
 
 body{
 
-    background:#f4f6f9;
+    background:#eef3f8;
 
     display:flex;
 
@@ -39,15 +41,15 @@ body{
 .login-container{
 
     width:100%;
-    max-width:450px;
+    max-width:460px;
 
-    background:#fff;
+    background:white;
 
-    border-radius:15px;
+    border-radius:18px;
 
-    padding:40px;
+    padding:45px;
 
-    box-shadow:0 15px 35px rgba(0,0,0,.12);
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
 
 }
 
@@ -63,11 +65,11 @@ body{
 
 h1{
 
-    font-size:26px;
+    text-align:center;
 
     color:#183153;
 
-    text-align:center;
+    font-size:30px;
 
     margin-bottom:10px;
 
@@ -79,9 +81,9 @@ h1{
 
     color:#666;
 
-    font-size:14px;
-
     margin-bottom:35px;
+
+    line-height:1.6;
 
 }
 
@@ -89,31 +91,30 @@ label{
 
     display:block;
 
-    font-size:14px;
+    margin-bottom:8px;
 
     font-weight:600;
-
-    margin-bottom:8px;
 
     color:#183153;
 
 }
 
-input{
+input[type=email],
+input[type=password]{
 
     width:100%;
 
-    padding:14px;
+    padding:15px;
 
     border:1px solid #d8d8d8;
 
-    border-radius:8px;
+    border-radius:10px;
 
-    margin-bottom:20px;
+    margin-bottom:22px;
 
     font-size:15px;
 
-    transition:.2s;
+    transition:.25s;
 
 }
 
@@ -122,6 +123,8 @@ input:focus{
     outline:none;
 
     border-color:#0094d8;
+
+    box-shadow:0 0 0 3px rgba(0,148,216,.15);
 
 }
 
@@ -133,15 +136,13 @@ input:focus{
 
     align-items:center;
 
-    margin-bottom:25px;
+    margin-bottom:28px;
 
     font-size:14px;
 
 }
 
 .options label{
-
-    margin:0;
 
     display:flex;
 
@@ -151,11 +152,11 @@ input:focus{
 
     font-weight:400;
 
+    margin:0;
+
 }
 
 .options input{
-
-    width:auto;
 
     margin:0;
 
@@ -163,9 +164,9 @@ input:focus{
 
 .options a{
 
-    text-decoration:none;
-
     color:#0094d8;
+
+    text-decoration:none;
 
 }
 
@@ -181,13 +182,13 @@ button{
 
     padding:15px;
 
-    background:#0094d8;
-
-    color:#fff;
-
     border:none;
 
-    border-radius:8px;
+    border-radius:10px;
+
+    background:#0094d8;
+
+    color:white;
 
     font-size:16px;
 
@@ -195,13 +196,13 @@ button{
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:.25s;
 
 }
 
 button:hover{
 
-    background:#007db8;
+    background:#0078b1;
 
 }
 
@@ -211,13 +212,13 @@ button:hover{
 
     margin-top:20px;
 
-    padding:12px;
-
-    border-radius:8px;
-
-    background:#ffe9e9;
+    background:#ffe8e8;
 
     color:#b00020;
+
+    padding:14px;
+
+    border-radius:8px;
 
     text-align:center;
 
@@ -227,17 +228,19 @@ button:hover{
 
     display:none;
 
+    margin-top:20px;
+
     text-align:center;
 
-    margin-top:20px;
+    color:#666;
 
 }
 
 .spinner{
 
-    width:40px;
+    width:42px;
 
-    height:40px;
+    height:42px;
 
     border:4px solid #ddd;
 
@@ -245,9 +248,9 @@ button:hover{
 
     border-radius:50%;
 
-    animation:spin 1s linear infinite;
+    margin:0 auto 15px;
 
-    margin:0 auto 10px;
+    animation:spin 1s linear infinite;
 
 }
 
@@ -271,17 +274,17 @@ button:hover{
 
     text-align:center;
 
-    margin-top:40px;
-
-    font-size:13px;
+    margin-top:35px;
 
     color:#888;
+
+    font-size:13px;
 
 }
 
 .version{
 
-    margin-bottom:8px;
+    margin-bottom:6px;
 
 }
 
@@ -293,24 +296,41 @@ button:hover{
 
 <div class="login-container">
 
-<img src="branding/logo.jpg" class="logo" alt="Heritage Healthcare">
+<img
+src="branding/logo.jpg"
+class="logo"
+alt="Heritage Healthcare">
 
-<h1>Welcome Back</h1>
+<h1>
+
+Welcome Back
+
+</h1>
 
 <p class="subtitle">
 
-Secure access for Head Office and Franchise users
+Secure access for Head Office and Franchise users.
+
+Sign in using your Heritage Healthcare account.
 
 </p>
 
-<label>Email Address</label>
+<label>
+
+Email Address
+
+</label>
 
 <input
 type="email"
 id="email"
 placeholder="Enter your email">
 
-<label>Password</label>
+<label>
+
+Password
+
+</label>
 
 <input
 type="password"
@@ -329,11 +349,15 @@ Remember Me
 
 </label>
 
-<a href="#">Forgot Password?</a>
+<a href="#">
+
+Forgot Password?
+
+</a>
 
 </div>
 
-<button onclick="login()">
+<button id="loginButton">
 
 Sign In
 
@@ -367,20 +391,19 @@ Version 2.0
 
 </div>
 
-<!-- =======================================
-Firebase Login Script
-Part 2 starts here
-======================================= -->
-
+<!-- Part 2 starts here -->
 <script type="module">
+
 // =========================================
-// Firebase Imports
+// Heritage Healthcare CRM
+// Firebase Login
 // =========================================
 
 import { auth, db } from "./firebase.js";
 
 import {
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
@@ -392,17 +415,77 @@ import {
 
 
 // =========================================
+// Check Existing Login
+// =========================================
+
+onAuthStateChanged(auth, async(user)=>{
+
+    if(!user){
+
+        return;
+
+    }
+
+    try{
+
+        const q = query(
+
+            collection(db,"users"),
+
+            where("email","==",user.email)
+
+        );
+
+        const snapshot =
+        await getDocs(q);
+
+        if(snapshot.empty){
+
+            return;
+
+        }
+
+        const profile =
+        snapshot.docs[0].data();
+
+        localStorage.setItem("userEmail",profile.email);
+
+        localStorage.setItem("userName",profile.name);
+
+        localStorage.setItem("office",profile.office);
+
+        localStorage.setItem("role",profile.role);
+
+        if(profile.role==="admin"){
+
+            window.location.replace("home.html");
+
+        }else{
+
+            window.location.replace("franchise_home.html");
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+});
+
+
+// =========================================
 // Login Function
 // =========================================
 
 async function login(){
 
-    // Hide previous messages
-
     document.getElementById("error").style.display="none";
 
     document.getElementById("loading").style.display="block";
-
 
     const email =
     document.getElementById("email")
@@ -414,12 +497,22 @@ async function login(){
     document.getElementById("password")
     .value;
 
+    if(email==="" || password===""){
+
+        document.getElementById("loading").style.display="none";
+
+        document.getElementById("error").innerHTML=
+        "Please enter your email and password.";
+
+        document.getElementById("error").style.display="block";
+
+        return;
+
+    }
 
     try{
 
-        // ===================================
         // Authenticate with Firebase
-        // ===================================
 
         await signInWithEmailAndPassword(
 
@@ -431,10 +524,7 @@ async function login(){
 
         );
 
-
-        // ===================================
-        // Find User Record
-        // ===================================
+        // Get user profile
 
         const q = query(
 
@@ -447,76 +537,30 @@ async function login(){
         const snapshot =
         await getDocs(q);
 
-
         if(snapshot.empty){
 
-            throw new Error(
-                "User profile not found."
-            );
+            throw new Error("User profile not found.");
 
         }
 
-
-        const user =
+        const profile =
         snapshot.docs[0].data();
 
+        if(profile.active===false){
 
-        // ===================================
-        // Check User Active
-        // ===================================
-
-        if(user.active===false){
-
-            throw new Error(
-                "This account has been disabled."
-            );
+            throw new Error("This account has been disabled.");
 
         }
 
+        // Save session
 
-        // ===================================
-        // Save Session
-        // ===================================
+        localStorage.setItem("userEmail",profile.email);
 
-        localStorage.setItem(
+        localStorage.setItem("userName",profile.name);
 
-            "loggedIn",
+        localStorage.setItem("office",profile.office);
 
-            "true"
-
-        );
-
-        localStorage.setItem(
-
-            "userEmail",
-
-            user.email
-
-        );
-
-        localStorage.setItem(
-
-            "userName",
-
-            user.name
-
-        );
-
-        localStorage.setItem(
-
-            "office",
-
-            user.office
-
-        );
-
-        localStorage.setItem(
-
-            "role",
-
-            user.role
-
-        );
+        localStorage.setItem("role",profile.role);
 
         localStorage.setItem(
 
@@ -526,10 +570,7 @@ async function login(){
 
         );
 
-
-        // ===================================
-        // Remember Me
-        // ===================================
+        // Remember email
 
         if(document.getElementById("remember").checked){
 
@@ -551,18 +592,15 @@ async function login(){
 
         }
 
+        // Redirect
 
-        // ===================================
-        // Redirect User
-        // ===================================
+        if(profile.role==="admin"){
 
-        if(user.role==="admin"){
-
-            window.location.href="home.html";
+            window.location.replace("home.html");
 
         }else{
 
-            window.location.href="franchise_home.html";
+            window.location.replace("franchise_home.html");
 
         }
 
@@ -574,16 +612,41 @@ async function login(){
 
         document.getElementById("loading").style.display="none";
 
+        document.getElementById("error").innerHTML=
+
+            error.message ||
+
+            "Login failed.";
+
         document.getElementById("error").style.display="block";
 
     }
 
 }
+
+
 // =========================================
-// Press Enter to Login
+// Login Button
 // =========================================
 
-document.addEventListener("keydown",function(e){
+document
+
+.getElementById("loginButton")
+
+.addEventListener(
+
+    "click",
+
+    login
+
+);
+
+
+// =========================================
+// Press Enter
+// =========================================
+
+document.addEventListener("keydown",(e)=>{
 
     if(e.key==="Enter"){
 
@@ -595,7 +658,7 @@ document.addEventListener("keydown",function(e){
 
 
 // =========================================
-// Remember Me
+// Remember Email
 // =========================================
 
 const rememberedEmail =
@@ -607,51 +670,6 @@ if(rememberedEmail){
     rememberedEmail;
 
     document.getElementById("remember").checked = true;
-
-}
-
-
-// =========================================
-// Check Existing Login
-// =========================================
-
-const loggedIn =
-localStorage.getItem("loggedIn");
-
-const role =
-localStorage.getItem("role");
-
-if(loggedIn==="true"){
-
-    if(role==="admin"){
-
-        window.location.href="home.html";
-
-    }
-
-    if(role==="franchise"){
-
-        window.location.href="franchise_home.html";
-
-    }
-
-}
-
-
-// =========================================
-// Logout Function
-// =========================================
-
-window.logout=function(){
-
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("office");
-    localStorage.removeItem("role");
-    localStorage.removeItem("lastLogin");
-
-    window.location.href="index.html";
 
 }
 
