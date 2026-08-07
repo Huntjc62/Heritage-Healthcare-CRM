@@ -1,0 +1,21 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBjbUiOfMXuhMP3UHTbG6RE9ylZedB3XBc",
+  authDomain: "heritage-healthcare-6a373.firebaseapp.com",
+  projectId: "heritage-healthcare-6a373",
+  storageBucket: "heritage-healthcare-6a373.firebasestorage.app",
+  messagingSenderId: "862952622503",
+  appId: "1:862952622503:web:ee327fae64ece49e084e82",
+  measurementId: "G-43F1XVJNWX"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
