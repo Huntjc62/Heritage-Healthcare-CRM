@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Analytics Report | Heritage Healthcare CRM</title>
+
+<link rel="icon" href="branding/logo.jpg">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+display:flex;
+color:#333;
+}
+
+/* Sidebar */
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:260px;
+height:100vh;
+background:linear-gradient(180deg,#004B8D,#006CB6);
+color:white;
+box-shadow:4px 0 20px rgba(0,0,0,.1);
+}
+
+.logo{
+padding:30px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo img{
+width:180px;
+margin-bottom:15px;
+}
+
+.logo h2{
+font-size:22px;
+font-weight:600;
+}
+
+.menu{
+padding:20px;
+}
+
+.menu a{
+display:block;
+padding:15px;
+margin-bottom:8px;
+color:white;
+text-decoration:none;
+border-radius:10px;
+transition:.3s;
+font-weight:600;
+}
+
+.menu a:hover{
+background:rgba(255,255,255,.12);
+}
+
+.menu .active{
+background:white;
+color:#004B8D;
+}
+
+/* Main */
+
+.main{
+margin-left:260px;
+width:calc(100% - 260px);
+}
+
+/* Header */
+
+.header{
+background:white;
+padding:30px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.header h1{
+font-size:32px;
+color:#004B8D;
+}
+
+.header p{
+color:#666;
+margin-top:6px;
+}
+
+.user{
+text-align:right;
+}
+
+.user strong{
+display:block;
+font-size:17px;
+}
+
+.user span{
+color:#777;
+font-size:14px;
+}
+
+.content{
+padding:35px;
+}
+
+/* Filters */
+
+.filters{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.filters select{
+
+padding:12px 18px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+background:white;
+
+font-size:15px;
+
+}
+
+.filters button{
+
+padding:12px 22px;
+
+background:#0077C8;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.filters button:hover{
+
+background:#005E9E;
+
+}
+
+/* KPI Cards */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-bottom:35px;
+
+}
+
+.card{
+
+background:white;
+
+padding:28px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.card h2{
+
+font-size:36px;
+
+color:#004B8D;
+
+margin-bottom:10px;
+
+}
+
+.card p{
+
+font-weight:600;
+
+color:#666;
+
+}
+
+.card small{
+
+display:block;
+
+margin-top:8px;
+
+color:#999;
+
+}
+
+/* Panels */
+
+.panel{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+margin-bottom:25px;
+
+}
+
+.panel h2{
+
+color:#004B8D;
+
+margin-bottom:15px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+<img src="branding/logo.jpg" alt="Heritage Healthcare">
+
+<h2>Analytics Report</h2>
+
+</div>
+
+<div class="menu">
+
+<a href="home.html">🏠 Home</a>
+
+<a href="enquiries.html">📥 Enquiries</a>
+
+<a href="analytics.html">📊 Analytics</a>
+
+<a href="reports.html" class="active">📄 Reports</a>
+
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+
+<div>
+
+<h1>National Analytics Report</h1>
+
+<p>Executive reporting across the Heritage Healthcare franchise network.</p>
+
+</div>
+
+<div class="user">
+
+<strong>Josh</strong>
+
+<span id="reportDate"></span>
+
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="filters">
+
+<select>
+
+<option>All Franchisees</option>
+<option>Basildon</option>
+<option>Bristol</option>
+<option>Cardiff</option>
+<option>Leicester</option>
+<option>Milton Keynes</option>
+<option>Wakefield & Kirklees</option>
+
+</select>
+
+<select>
+
+<option>Last 30 Days</option>
+<option>Last 7 Days</option>
+<option>This Quarter</option>
+<option>This Year</option>
+
+</select>
+
+<button>
+🔄 Refresh Report
+</button>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<h2>247</h2>
+
+<p>Total Enquiries</p>
+
+<small>▲ 14% vs previous period</small>
+
+</div>
+
+<div class="card">
+
+<h2>51%</h2>
+
+<p>Conversion Rate</p>
+
+<small>Above company target</small>
+
+</div>
+
+<div class="card">
+
+<h2>1.8 hrs</h2>
+
+<p>Average Response Time</p>
+
+<small>Fastest national average</small>
+
+</div>
+
+<div class="card">
+
+<h2>21</h2>
+
+<p>Active Franchisees</p>
+
+<small>Reporting this month</small>
+
+</div>
+
+<div class="card">
+
+<h2>4.9 ★</h2>
+
+<p>Average Google Rating</p>
+
+<small>Across all offices</small>
+
+</div>
+
+<div class="card">
+
+<h2>97%</h2>
+
+<p>Compliance Score</p>
+
+<small>Network average</small>
+
+</div>
+
+</div>
+<!-- Executive Summary -->
+
+<div class="panel">
+
+<h2>📋 Executive Summary</h2>
+
+<p style="line-height:1.8;color:#555;font-size:16px;">
+
+The Heritage Healthcare franchise network received
+<strong>247 enquiries</strong> during the selected reporting period,
+representing a <strong>14% increase</strong> compared to the previous
+period. The average response time remained below
+<strong>2 hours</strong>, while the overall enquiry conversion rate
+improved to <strong>51%</strong>. Recruitment enquiries continue to
+increase across the network, with Cardiff and Bristol delivering the
+highest levels of enquiry growth.
+
+</p>
+
+</div>
+
+<!-- Charts -->
+
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:25px;">
+
+<div class="panel">
+
+<h2>📈 Monthly Enquiry Trend</h2>
+
+<canvas id="monthlyChart" height="120"></canvas>
+
+</div>
+
+<div class="panel">
+
+<h2>🥧 Enquiry Breakdown</h2>
+
+<canvas id="breakdownChart"></canvas>
+
+</div>
+
+</div>
+
+<br>
+
+<!-- Office Performance -->
+
+<div class="panel">
+
+<h2>🏆 Top Performing Franchisees</h2>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr style="background:#004B8D;color:white;">
+
+<th style="padding:14px;text-align:left;">Rank</th>
+
+<th>Office</th>
+
+<th>Total Enquiries</th>
+
+<th>Conversion Rate</th>
+
+<th>Performance</th>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">🥇 1</td>
+
+<td>Cardiff</td>
+
+<td>42</td>
+
+<td>61%</td>
+
+<td style="color:green;font-weight:600;">Excellent</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">🥈 2</td>
+
+<td>Bristol</td>
+
+<td>39</td>
+
+<td>58%</td>
+
+<td style="color:green;font-weight:600;">Excellent</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">🥉 3</td>
+
+<td>Wakefield & Kirklees</td>
+
+<td>35</td>
+
+<td>54%</td>
+
+<td style="color:#0077C8;font-weight:600;">Very Good</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">4</td>
+
+<td>Leicester</td>
+
+<td>31</td>
+
+<td>50%</td>
+
+<td style="color:#0077C8;font-weight:600;">Good</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">5</td>
+
+<td>Basildon</td>
+
+<td>28</td>
+
+<td>47%</td>
+
+<td style="color:#F39C12;font-weight:600;">Average</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">6</td>
+
+<td>Milton Keynes</td>
+
+<td>25</td>
+
+<td>45%</td>
+
+<td style="color:#F39C12;font-weight:600;">Average</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<!-- Performance Highlights -->
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+<div class="panel">
+
+<h2>🚀 Highest Growth</h2>
+
+<h3 style="color:#0077C8;font-size:28px;margin:15px 0;">
+
++24%
+
+</h3>
+
+<p>
+
+Cardiff recorded the highest month-on-month increase in enquiries across
+the franchise network.
+
+</p>
+
+</div>
+
+<div class="panel">
+
+<h2>⚡ Fastest Response</h2>
+
+<h3 style="color:#00A86B;font-size:28px;margin:15px 0;">
+
+38 mins
+
+</h3>
+
+<p>
+
+Wakefield & Kirklees achieved the fastest average response time for new
+enquiries.
+
+</p>
+
+</div>
+
+<div class="panel">
+
+<h2>⭐ Best Conversion</h2>
+
+<h3 style="color:#F4B400;font-size:28px;margin:15px 0;">
+
+61%
+
+</h3>
+
+<p>
+
+Cardiff converted the highest percentage of enquiries into clients this
+reporting period.
+
+</p>
+
+</div>
+
+</div>
+<br><br>
+
+<!-- National Performance -->
+
+<div class="panel">
+
+<h2>📊 National Franchise Performance</h2>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr style="background:#004B8D;color:white;">
+
+<th style="padding:12px;text-align:left;">Office</th>
+<th>Total Enquiries</th>
+<th>Converted</th>
+<th>Conversion %</th>
+<th>Avg Response</th>
+<th>Status</th>
+
+</tr>
+
+<tr>
+<td style="padding:12px;">Cardiff</td>
+<td>42</td>
+<td>26</td>
+<td>61%</td>
+<td>58 mins</td>
+<td style="color:green;font-weight:600;">Excellent</td>
+</tr>
+
+<tr>
+<td style="padding:12px;">Bristol</td>
+<td>39</td>
+<td>23</td>
+<td>58%</td>
+<td>1 hr 04 mins</td>
+<td style="color:green;font-weight:600;">Excellent</td>
+</tr>
+
+<tr>
+<td style="padding:12px;">Wakefield & Kirklees</td>
+<td>35</td>
+<td>19</td>
+<td>54%</td>
+<td>38 mins</td>
+<td style="color:#0077C8;font-weight:600;">Very Good</td>
+</tr>
+
+<tr>
+<td style="padding:12px;">Leicester</td>
+<td>31</td>
+<td>16</td>
+<td>52%</td>
+<td>1 hr 18 mins</td>
+<td style="color:#0077C8;font-weight:600;">Good</td>
+</tr>
+
+<tr>
+<td style="padding:12px;">Basildon</td>
+<td>28</td>
+<td>13</td>
+<td>46%</td>
+<td>2 hrs 05 mins</td>
+<td style="color:#F39C12;font-weight:600;">Average</td>
+</tr>
+
+<tr>
+<td style="padding:12px;">Milton Keynes</td>
+<td>25</td>
+<td>11</td>
+<td>44%</td>
+<td>2 hrs 16 mins</td>
+<td style="color:#E67E22;font-weight:600;">Needs Attention</td>
+</tr>
+
+</table>
+
+</div>
+
+<br>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;">
+
+<!-- Monthly Performance -->
+
+<div class="panel">
+
+<h2>📅 Monthly Performance</h2>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr style="background:#0077C8;color:white;">
+
+<th style="padding:10px;">Month</th>
+<th>Enquiries</th>
+<th>Converted</th>
+
+</tr>
+
+<tr><td style="padding:10px;">January</td><td>35</td><td>18</td></tr>
+<tr><td style="padding:10px;">February</td><td>42</td><td>21</td></tr>
+<tr><td style="padding:10px;">March</td><td>57</td><td>30</td></tr>
+<tr><td style="padding:10px;">April</td><td>63</td><td>34</td></tr>
+<tr><td style="padding:10px;">May</td><td>71</td><td>39</td></tr>
+<tr><td style="padding:10px;">June</td><td>79</td><td>45</td></tr>
+
+</table>
+
+</div>
+
+<!-- Conversion Analysis -->
+
+<div class="panel">
+
+<h2>📈 Conversion Analysis</h2>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr style="background:#0077C8;color:white;">
+
+<th style="padding:10px;">Source</th>
+<th>Enquiries</th>
+<th>Conversion</th>
+
+</tr>
+
+<tr>
+
+<td style="padding:10px;">Website</td>
+
+<td>108</td>
+
+<td>56%</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:10px;">Telephone</td>
+
+<td>74</td>
+
+<td>49%</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:10px;">Google Business Profile</td>
+
+<td>39</td>
+
+<td>52%</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:10px;">Social Media</td>
+
+<td>26</td>
+
+<td>41%</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<br>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;">
+
+<!-- Key Insights -->
+
+<div class="panel">
+
+<h2>💡 Key Insights</h2>
+
+<ul style="line-height:2;">
+
+<li>Total enquiries increased by <strong>14%</strong>.</li>
+
+<li>Conversion rates exceeded the company target.</li>
+
+<li>Cardiff remains the highest-performing office.</li>
+
+<li>Recruitment enquiries continue to grow nationally.</li>
+
+<li>Website enquiries account for almost half of all leads.</li>
+
+<li>Average response time improved across the network.</li>
+
+<li>Marketing campaigns generated higher-quality enquiries.</li>
+
+<li>Google Business Profile remains a strong lead source.</li>
+
+</ul>
+
+</div>
+
+<!-- Recommendations -->
+
+<div class="panel">
+
+<h2>🎯 Recommendations</h2>
+
+<ul style="line-height:2;">
+
+<li>Increase digital marketing investment in lower-performing territories.</li>
+
+<li>Share Cardiff's enquiry handling process as best practice.</li>
+
+<li>Review response times for Milton Keynes and Basildon.</li>
+
+<li>Continue improving website conversion pathways.</li>
+
+<li>Expand successful recruitment campaigns nationally.</li>
+
+<li>Introduce monthly performance reviews with franchisees.</li>
+
+<li>Monitor enquiry quality alongside enquiry volume.</li>
+
+<li>Continue investing in SEO and Google Business Profile optimisation.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="panel">
+
+<h2>📝 Executive Commentary</h2>
+
+<p style="line-height:1.9;color:#555;font-size:16px;">
+
+Overall, the Heritage Healthcare franchise network continues to demonstrate strong enquiry growth and healthy conversion performance. National response times have improved, with several offices consistently exceeding key performance indicators. Continued focus on digital marketing, rapid enquiry handling and sharing operational best practice between franchisees should support sustained growth throughout the remainder of the reporting year.
+
+</p>
+
+</div>
+<br><br>
+
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;">
+
+<div id="reportDate" style="font-size:15px;color:#666;font-weight:500;"></div>
+
+<div>
+
+<button id="excelExport" style="
+padding:12px 22px;
+background:#00A86B;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+margin-right:10px;
+">
+
+📊 Export to Excel
+
+</button>
+
+<button id="pdfExport" style="
+padding:12px 22px;
+background:#C0392B;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+margin-right:10px;
+">
+
+📄 Save as PDF
+
+</button>
+
+<button id="emailExport" style="
+padding:12px 22px;
+background:#004B8D;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+margin-right:10px;
+">
+
+📧 Email Report
+
+</button>
+
+<button onclick="window.location.href='reports.html'" style="
+padding:12px 22px;
+background:#555;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+">
+
+⬅ Back to Reports
+
+</button>
+
+</div>
+
+</div>
+
+<br>
+
+<footer style="
+text-align:center;
+padding:25px;
+font-size:14px;
+color:#888;
+border-top:1px solid #ddd;
+">
+
+Heritage Healthcare CRM • National Analytics Report • Executive Reporting Suite © 2026
+
+</footer>
+
+</div>
+
+</div>
+
+<script>
+
+// ------------------------------------------------------
+// Report Date
+// ------------------------------------------------------
+
+const today = new Date();
+
+document.getElementById("reportDate").innerHTML =
+"Report Generated: " +
+today.toLocaleDateString("en-GB",{
+weekday:"long",
+day:"numeric",
+month:"long",
+year:"numeric"
+});
+
+// ------------------------------------------------------
+// Monthly Trend Chart
+// ------------------------------------------------------
+
+new Chart(document.getElementById("monthlyChart"),{
+
+type:"line",
+
+data:{
+
+labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+
+datasets:[{
+
+label:"Enquiries",
+
+data:[35,42,57,63,71,79,81,76,69,74,83,91],
+
+borderColor:"#0077C8",
+
+backgroundColor:"rgba(0,119,200,.12)",
+
+fill:true,
+
+tension:.35,
+
+borderWidth:3,
+
+pointRadius:4
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+legend:{display:false}
+},
+
+scales:{
+y:{
+beginAtZero:true
+}
+}
+
+}
+
+});
+
+// ------------------------------------------------------
+// Breakdown Chart
+// ------------------------------------------------------
+
+new Chart(document.getElementById("breakdownChart"),{
+
+type:"doughnut",
+
+data:{
+
+labels:[
+"Care",
+"Recruitment",
+"Franchise"
+],
+
+datasets:[{
+
+data:[
+141,
+68,
+38
+],
+
+backgroundColor:[
+"#0077C8",
+"#00A86B",
+"#F4B400"
+]
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+position:"bottom"
+
+}
+
+}
+
+}
+
+});
+
+// ------------------------------------------------------
+// Export Excel
+// ------------------------------------------------------
+
+document.getElementById("excelExport").addEventListener("click",function(){
+
+let csv=[];
+
+csv.push(["HERITAGE HEALTHCARE ANALYTICS REPORT"]);
+
+csv.push(["Generated",today.toLocaleDateString("en-GB")]);
+
+csv.push([""]);
+
+csv.push(["Office","Enquiries","Conversions","Conversion %"]);
+
+csv.push(["Cardiff",42,26,"61%"]);
+csv.push(["Bristol",39,23,"58%"]);
+csv.push(["Wakefield & Kirklees",35,19,"54%"]);
+csv.push(["Leicester",31,16,"52%"]);
+csv.push(["Basildon",28,13,"46%"]);
+csv.push(["Milton Keynes",25,11,"44%"]);
+
+let csvContent=csv.map(e=>e.join(",")).join("\n");
+
+let blob=new Blob([csvContent],{
+
+type:"text/csv;charset=utf-8;"
+
+});
+
+let link=document.createElement("a");
+
+link.href=URL.createObjectURL(blob);
+
+link.download="Analytics_Report.csv";
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+});
+
+// ------------------------------------------------------
+// PDF Export
+// ------------------------------------------------------
+
+document.getElementById("pdfExport").addEventListener("click",function(){
+
+window.print();
+
+});
+
+// ------------------------------------------------------
+// Email
+// ------------------------------------------------------
+
+document.getElementById("emailExport").addEventListener("click",function(){
+
+alert("Analytics report has been prepared for email delivery.");
+
+});
+
+// ------------------------------------------------------
+// Button Hover Effect
+// ------------------------------------------------------
+
+document.querySelectorAll("button").forEach(function(btn){
+
+btn.addEventListener("mouseenter",function(){
+
+this.style.opacity=".9";
+
+});
+
+btn.addEventListener("mouseleave",function(){
+
+this.style.opacity="1";
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>

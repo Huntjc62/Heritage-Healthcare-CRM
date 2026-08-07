@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -21,90 +22,66 @@ font-family:'Inter',sans-serif;
 }
 
 body{
-
 height:100vh;
-
 display:flex;
 justify-content:center;
 align-items:center;
-
-background:
-linear-gradient(135deg,#003D73 0%,#005C99 50%,#0077C8 100%);
-
+background:linear-gradient(135deg,#003D73 0%,#005C99 50%,#0077C8 100%);
 overflow:hidden;
-
 }
 
 body::before{
-
 content:"";
-
 position:absolute;
-
 width:700px;
 height:700px;
-
 background:rgba(255,255,255,.05);
-
 border-radius:50%;
-
-top:-200px;
-left:-200px;
-
+top:-220px;
+left:-220px;
 }
 
 body::after{
-
 content:"";
-
 position:absolute;
-
-width:600px;
-height:600px;
-
+width:650px;
+height:650px;
 background:rgba(255,255,255,.05);
-
 border-radius:50%;
-
 bottom:-200px;
-right:-150px;
-
+right:-170px;
 }
 
 .login-card{
 
 position:relative;
 
-z-index:5;
+z-index:10;
 
-width:440px;
+width:470px;
 
-background:white;
+background:#fff;
 
-border-radius:20px;
+border-radius:22px;
 
-padding:50px;
+padding:45px;
 
-box-shadow:0 30px 70px rgba(0,0,0,.25);
+box-shadow:0 35px 80px rgba(0,0,0,.28);
 
-animation:fadeIn .6s ease;
+animation:fadeIn .5s ease;
 
 }
 
 @keyframes fadeIn{
 
 from{
-
 opacity:0;
 transform:translateY(25px);
-
 }
 
 to{
-
 opacity:1;
 transform:translateY(0);
-
 }
 
 }
@@ -119,9 +96,7 @@ margin-bottom:35px;
 
 .logo img{
 
-width:230px;
-max-width:100%;
-height:auto;
+width:220px;
 
 margin-bottom:20px;
 
@@ -133,21 +108,43 @@ font-size:30px;
 
 color:#004B8D;
 
-margin-bottom:8px;
+margin-bottom:10px;
 
 }
 
 .logo p{
 
+font-size:15px;
+
 color:#666;
 
-font-size:15px;
+line-height:1.6;
+
+}
+
+.portal{
+
+margin-top:18px;
+
+display:inline-block;
+
+padding:8px 18px;
+
+background:#EAF5FC;
+
+color:#004B8D;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:600;
 
 }
 
 .input-group{
 
-margin-top:20px;
+margin-top:22px;
 
 }
 
@@ -171,7 +168,7 @@ width:100%;
 
 padding:15px;
 
-border:1px solid #d8d8d8;
+border:1px solid #D6D6D6;
 
 border-radius:10px;
 
@@ -211,6 +208,18 @@ text-decoration:none;
 
 color:#0077C8;
 
+font-weight:500;
+
+}
+
+.options label{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
 }
 
 button{
@@ -219,7 +228,7 @@ width:100%;
 
 padding:16px;
 
-margin-top:28px;
+margin-top:30px;
 
 background:#0077C8;
 
@@ -253,29 +262,83 @@ display:none;
 
 margin-top:20px;
 
-padding:12px;
+padding:14px;
 
-background:#ffe5e5;
+background:#FFE7E7;
 
-color:#b00020;
+color:#B00020;
 
-border-radius:8px;
+border-radius:10px;
+
+text-align:center;
 
 font-size:14px;
 
-text-align:center;
+}
+
+.demo{
+
+margin-top:30px;
+
+padding:20px;
+
+background:#F7FAFD;
+
+border-radius:12px;
+
+border:1px solid #E4EEF6;
+
+}
+
+.demo h3{
+
+font-size:16px;
+
+color:#004B8D;
+
+margin-bottom:15px;
+
+}
+
+.demo table{
+
+width:100%;
+
+border-collapse:collapse;
+
+font-size:13px;
+
+}
+
+.demo th{
+
+background:#004B8D;
+
+color:white;
+
+padding:8px;
+
+}
+
+.demo td{
+
+padding:8px;
+
+border-bottom:1px solid #E8E8E8;
 
 }
 
 .footer{
 
-margin-top:35px;
+margin-top:25px;
 
 text-align:center;
 
 font-size:13px;
 
 color:#888;
+
+line-height:1.7;
 
 }
 
@@ -297,7 +360,13 @@ width:180px;
 
 .logo h1{
 
-font-size:24px;
+font-size:25px;
+
+}
+
+.demo{
+
+display:none;
 
 }
 
@@ -313,11 +382,21 @@ font-size:24px;
 
 <div class="logo">
 
-<img src="branding/logo.jpg" alt="Heritage Healthcare Logo">
+<img src="branding/logo.jpg" alt="Heritage Healthcare">
 
 <h1>Heritage Healthcare CRM</h1>
 
-<p>Franchisor Administration Portal</p>
+<p>
+
+Secure access for Head Office and Franchise users.
+
+</p>
+
+<span class="portal">
+
+Role-Based Login Portal
+
+</span>
 
 </div>
 
@@ -328,7 +407,7 @@ font-size:24px;
 <input
 type="email"
 id="email"
-placeholder="josh@heritagehealthcare.co.uk">
+placeholder="name@heritagehealthcare.co.uk">
 
 </div>
 
@@ -349,11 +428,15 @@ placeholder="Enter your password">
 
 <input type="checkbox">
 
- Remember me
+Remember me
 
 </label>
 
-<a href="#">Forgot password?</a>
+<a href="#">
+
+Forgot password?
+
+</a>
 
 </div>
 
@@ -365,36 +448,213 @@ Sign In
 
 <div id="error">
 
-Incorrect email or password.
+Incorrect email address or password.
+
+</div>
+
+<div class="demo">
+
+<h3>Example User Accounts</h3>
+
+<table>
+
+<tr>
+
+<th>Role</th>
+
+<th>Portal</th>
+
+</tr>
+
+<tr>
+
+<td>Head Office</td>
+
+<td>Full CRM Access</td>
+
+</tr>
+
+<tr>
+
+<td>Franchise</td>
+
+<td>Office CRM Access</td>
+
+</tr>
+
+</table>
 
 </div>
 
 <div class="footer">
 
-Version 1.0<br>
+Version 2.0<br>
 
-© 2026 Heritage Healthcare CRM
+© 2026 Heritage Healthcare CRM<br>
+
+Role-Based Access System
 
 </div>
 
 </div>
-
 <script>
+
+// =========================================
+// Heritage Healthcare CRM
+// User Accounts
+// =========================================
+
+const users = [
+
+    // ==========================
+    // Head Office Administrator
+    // ==========================
+
+    {
+        email: "josh@heritagehealthcare.co.uk",
+        password: "password123",
+        role: "admin",
+        office: "All Offices",
+        name: "Josh",
+        redirect: "home.html"
+    },
+
+    // ==========================
+    // Franchise Users
+    // ==========================
+
+    {
+        email: "basildon@heritagehealthcare.co.uk",
+        password: "basildon123",
+        role: "franchise",
+        office: "Basildon",
+        name: "Basildon Franchise",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "birmingham@heritagehealthcare.co.uk",
+        password: "birmingham123",
+        role: "franchise",
+        office: "Birmingham South",
+        name: "Birmingham South",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "bristol@heritagehealthcare.co.uk",
+        password: "bristol123",
+        role: "franchise",
+        office: "Bristol",
+        name: "Bristol Franchise",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "cardiff@heritagehealthcare.co.uk",
+        password: "cardiff123",
+        role: "franchise",
+        office: "Cardiff",
+        name: "Cardiff Franchise",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "leicester@heritagehealthcare.co.uk",
+        password: "leicester123",
+        role: "franchise",
+        office: "Leicester",
+        name: "Leicester Franchise",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "miltonkeynes@heritagehealthcare.co.uk",
+        password: "mk123",
+        role: "franchise",
+        office: "Milton Keynes",
+        name: "Milton Keynes",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "wakefield@heritagehealthcare.co.uk",
+        password: "wakefield123",
+        role: "franchise",
+        office: "Wakefield & Kirklees",
+        name: "Wakefield & Kirklees",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "northtyneside@heritagehealthcare.co.uk",
+        password: "nt123",
+        role: "franchise",
+        office: "North Tyneside & South Northumberland",
+        name: "North Tyneside",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "northeastoffice@heritagehealthcare.co.uk",
+        password: "northeast123",
+        role: "franchise",
+        office: "North East",
+        name: "North East Franchise",
+        redirect: "franchise_home.html"
+    },
+
+    {
+        email: "yorkoffice@heritagehealthcare.co.uk",
+        password: "york123",
+        role: "franchise",
+        office: "York",
+        name: "York Franchise",
+        redirect: "franchise_home.html"
+    }
+
+];
+
+// ---------------------------
+// Login
+// ---------------------------
 
 function login(){
 
-const email=document.getElementById("email").value.trim();
+const email =
+document.getElementById("email")
+.value
+.trim()
+.toLowerCase();
 
-const password=document.getElementById("password").value;
+const password =
+document.getElementById("password")
+.value;
 
-if(
-email==="josh@heritagehealthcare.co.uk" &&
-password==="password123"
-){
+const user =
+users.find(u =>
+u.email===email &&
+u.password===password
+);
 
-window.location.href="home.html";
+if(user){
 
-}else{
+localStorage.setItem("loggedIn","true");
+
+localStorage.setItem("userEmail",user.email);
+
+localStorage.setItem("userName",user.name);
+
+localStorage.setItem("role",user.role);
+
+localStorage.setItem("office",user.office);
+
+localStorage.setItem("lastLogin",new Date().toLocaleString("en-GB"));
+
+window.location.href=user.redirect;
+
+}
+else{
 
 document.getElementById("error").style.display="block";
 
@@ -402,9 +662,13 @@ document.getElementById("error").style.display="block";
 
 }
 
-document.addEventListener("keydown",function(event){
+// ---------------------------
+// Press Enter to Login
+// ---------------------------
 
-if(event.key==="Enter"){
+document.addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
 
 login();
 
@@ -412,7 +676,28 @@ login();
 
 });
 
+// ---------------------------
+// Auto Redirect if Logged In
+// ---------------------------
+
+if(localStorage.getItem("loggedIn")==="true"){
+
+const role=localStorage.getItem("role");
+
+if(role==="admin"){
+
+window.location.href="home.html";
+
+}else{
+
+window.location.href="franchise_home.html";
+
+}
+
+}
+
 </script>
 
 </body>
+
 </html>

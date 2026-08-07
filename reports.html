@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports | Heritage Healthcare CRM</title>
+
+<link rel="icon" href="branding/logo.jpg">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+display:flex;
+color:#333;
+}
+
+/* Sidebar */
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:260px;
+height:100vh;
+background:linear-gradient(180deg,#004B8D,#006CB6);
+color:white;
+box-shadow:5px 0 20px rgba(0,0,0,.12);
+}
+
+.logo{
+padding:30px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo img{
+width:180px;
+}
+
+.logo h2{
+margin-top:15px;
+font-size:22px;
+font-weight:600;
+}
+
+.menu{
+padding:20px;
+}
+
+.menu a{
+display:block;
+padding:15px 18px;
+margin-bottom:8px;
+text-decoration:none;
+color:white;
+border-radius:10px;
+font-weight:600;
+transition:.3s;
+}
+
+.menu a:hover{
+background:rgba(255,255,255,.12);
+}
+
+.menu .active{
+background:white;
+color:#004B8D;
+}
+
+/* Main */
+
+.main{
+margin-left:260px;
+width:calc(100% - 260px);
+}
+
+.topbar{
+background:white;
+padding:25px 35px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.topbar h1{
+color:#004B8D;
+}
+
+.topbar small{
+color:#777;
+}
+
+.content{
+padding:35px;
+}
+
+/* Filters */
+
+.filters{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.filters select{
+padding:12px 15px;
+border-radius:10px;
+border:1px solid #ddd;
+background:white;
+}
+
+/* KPI Cards */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+margin-bottom:35px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h2{
+font-size:34px;
+color:#004B8D;
+margin-bottom:8px;
+}
+
+.card span{
+color:#777;
+}
+
+/* Reports */
+
+.report-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.report{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.3s;
+text-align:center;
+}
+
+.report:hover{
+transform:translateY(-5px);
+}
+
+.report h3{
+margin-bottom:12px;
+color:#004B8D;
+}
+
+.report p{
+color:#666;
+font-size:14px;
+line-height:1.5;
+min-height:42px;
+}
+
+.report button{
+margin-top:20px;
+padding:12px 18px;
+width:100%;
+background:#0077C8;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+transition:.3s;
+}
+
+.report button:hover{
+background:#005E9E;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+<img src="branding/logo.jpg">
+
+<h2>Reports Dashboard</h2>
+
+</div>
+
+<div class="menu">
+
+<a href="home.html">🏠 Home</a>
+
+<a href="enquiries.html">📥 Enquiries</a>
+
+<a href="analytics.html">📊 Analytics</a>
+
+<a href="reports.html" class="active">📄 Reports</a>
+
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<div>
+
+<h1>Reports Dashboard</h1>
+
+<small>Create and manage Heritage Healthcare reports</small>
+
+</div>
+
+<div>
+
+<strong>Josh</strong>
+
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="filters">
+
+<select>
+
+<option>All Franchisees</option>
+<option>Bristol</option>
+<option>Cardiff</option>
+<option>Wakefield & Kirklees</option>
+<option>Milton Keynes</option>
+<option>Leicester</option>
+<option>Basildon</option>
+
+</select>
+
+<select>
+
+<option>Last 30 Days</option>
+<option>Last 7 Days</option>
+<option>This Quarter</option>
+<option>This Year</option>
+
+</select>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h2>42</h2>
+<span>Reports Generated</span>
+</div>
+
+<div class="card">
+<h2>8</h2>
+<span>Scheduled Reports</span>
+</div>
+
+<div class="card">
+<h2>14</h2>
+<span>Reports This Month</span>
+</div>
+
+<div class="card">
+<h2>21</h2>
+<span>Franchise Reports</span>
+</div>
+
+</div>
+
+<div class="report-grid">
+
+<div class="report">
+
+<h3>📊 Analytics Report</h3>
+
+<p>View detailed enquiry trends, performance and KPI analytics.</p>
+
+<button onclick="window.location.href='analytics_report.html'">
+
+Open Report
+
+</button>
+
+</div>
+
+<div class="report">
+
+<h3>📥 Enquiries Report</h3>
+
+<p>Review all enquiries across the franchise network.</p>
+
+<button onclick="window.location.href='enquiries_report.html'">
+
+Open Report
+
+</button>
+
+</div>
+
+<div class="report">
+
+<h3>❤️ Care Report</h3>
+
+<p>Analyse care enquiries, conversions and outcomes.</p>
+
+<button onclick="window.location.href='care_report.html'">
+
+Open Report
+
+</button>
+
+</div>
+
+<div class="report">
+
+<h3>👥 Recruitment Report</h3>
+
+<p>Review recruitment enquiries and applicant activity.</p>
+
+<button onclick="window.location.href='recruitment_report.html'">
+
+Open Report
+
+</button>
+
+</div>
+
+<div class="report">
+
+<h3>📈 Marketing Report</h3>
+
+<p>Campaigns, website traffic and social media performance.</p>
+
+<button onclick="window.location.href='marketing_report.html'">
+
+Open Report
+
+</button>
+
+</div>
+
+<div class="report">
+
+<h3>⭐ Reputation Report</h3>
+
+<p>Google Reviews, Homecare.co.uk ratings and reputation metrics.</p>
+
+<button onclick="window.location.href='reputation_report.html'">
+
+Open Report
+
+</button>
+
+</div>
+
+</div>
+<br><br>
+
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:25px;">
+
+<!-- Recent Reports -->
+
+<div style="background:white;padding:25px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.08);">
+
+<h2 style="color:#004B8D;margin-bottom:20px;">
+🕒 Recent Reports
+</h2>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr style="background:#004B8D;color:white;">
+
+<th style="padding:12px;text-align:left;">Report</th>
+
+<th>Date</th>
+
+<th>Office</th>
+
+<th>Status</th>
+
+<th>Open</th>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">Analytics Report</td>
+
+<td>08/08/2026</td>
+
+<td>All Offices</td>
+
+<td style="color:green;font-weight:600;">Ready</td>
+
+<td>
+<button onclick="window.location.href='analytics_report.html'">
+Open
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">Enquiries Report</td>
+
+<td>08/08/2026</td>
+
+<td>All Offices</td>
+
+<td style="color:green;font-weight:600;">Ready</td>
+
+<td>
+<button onclick="window.location.href='enquiries_report.html'">
+Open
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">Care Report</td>
+
+<td>07/08/2026</td>
+
+<td>Cardiff</td>
+
+<td style="color:green;font-weight:600;">Ready</td>
+
+<td>
+<button onclick="window.location.href='care_report.html'">
+Open
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">Recruitment Report</td>
+
+<td>07/08/2026</td>
+
+<td>National</td>
+
+<td style="color:green;font-weight:600;">Ready</td>
+
+<td>
+<button onclick="window.location.href='recruitment_report.html'">
+Open
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">Marketing Report</td>
+
+<td>06/08/2026</td>
+
+<td>All Offices</td>
+
+<td style="color:green;font-weight:600;">Ready</td>
+
+<td>
+<button onclick="window.location.href='marketing_report.html'">
+Open
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px;">Reputation Report</td>
+
+<td>06/08/2026</td>
+
+<td>National</td>
+
+<td style="color:green;font-weight:600;">Ready</td>
+
+<td>
+<button onclick="window.location.href='reputation_report.html'">
+Open
+</button>
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<!-- Right Column -->
+
+<div style="display:flex;flex-direction:column;gap:25px;">
+
+<!-- Quick Actions -->
+
+<div style="background:white;padding:25px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.08);">
+
+<h2 style="color:#004B8D;margin-bottom:20px;">
+⚡ Quick Actions
+</h2>
+
+<button id="excelBtn" style="width:100%;padding:14px;margin-bottom:12px;background:#00A86B;color:white;border:none;border-radius:8px;cursor:pointer;">
+
+📊 Export Excel
+
+</button>
+
+<button id="pdfBtn" style="width:100%;padding:14px;margin-bottom:12px;background:#C0392B;color:white;border:none;border-radius:8px;cursor:pointer;">
+
+📄 Export PDF
+
+</button>
+
+<button id="emailBtn" style="width:100%;padding:14px;background:#004B8D;color:white;border:none;border-radius:8px;cursor:pointer;">
+
+📧 Email Latest Report
+
+</button>
+
+</div>
+
+<!-- Scheduled Reports -->
+
+<div style="background:white;padding:25px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.08);">
+
+<h2 style="color:#004B8D;margin-bottom:20px;">
+📅 Scheduled Reports
+</h2>
+
+<p>✅ Weekly National Report</p>
+
+<p style="margin-top:10px;">✅ Monthly Franchise Performance</p>
+
+<p style="margin-top:10px;">✅ Recruitment Summary</p>
+
+<p style="margin-top:10px;">✅ Marketing Overview</p>
+
+<p style="margin-top:10px;">✅ Care Performance</p>
+
+<p style="margin-top:10px;">✅ Reputation Report</p>
+
+</div>
+
+<!-- Generate Office Report -->
+
+<div style="background:white;padding:25px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.08);">
+
+<h2 style="color:#004B8D;margin-bottom:20px;">
+🏢 Generate Office Report
+</h2>
+
+<select style="width:100%;padding:12px;margin-bottom:15px;border-radius:8px;">
+
+<option>Choose Franchise</option>
+
+<option>Bristol</option>
+
+<option>Cardiff</option>
+
+<option>Wakefield & Kirklees</option>
+
+<option>Milton Keynes</option>
+
+<option>Leicester</option>
+
+<option>Basildon</option>
+
+</select>
+
+<select style="width:100%;padding:12px;margin-bottom:20px;border-radius:8px;">
+
+<option>Select Report</option>
+
+<option>Analytics</option>
+
+<option>Enquiries</option>
+
+<option>Care</option>
+
+<option>Recruitment</option>
+
+<option>Marketing</option>
+
+<option>Reputation</option>
+
+</select>
+
+<button style="width:100%;padding:14px;background:#0077C8;color:white;border:none;border-radius:8px;cursor:pointer;">
+
+Generate Office Report
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+<br><br>
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+
+<div id="currentDate" style="
+font-size:15px;
+color:#666;
+font-weight:500;
+">
+</div>
+
+</div>
+
+<br>
+
+<footer style="
+text-align:center;
+padding:20px;
+color:#888;
+font-size:14px;
+border-top:1px solid #ddd;
+">
+
+Heritage Healthcare CRM • Reports Dashboard © 2026
+
+</footer>
+
+</div>
+
+</div>
+
+<script>
+
+// ===========================
+// Current Date
+// ===========================
+
+const today = new Date();
+
+document.getElementById("currentDate").innerHTML =
+"Today's Date: " +
+today.toLocaleDateString("en-GB",{
+weekday:"long",
+day:"numeric",
+month:"long",
+year:"numeric"
+});
+
+// ===========================
+// Excel Export
+// ===========================
+
+document.getElementById("excelBtn").addEventListener("click",function(){
+
+let csv=[];
+
+csv.push(["HERITAGE HEALTHCARE REPORTS"]);
+
+csv.push(["Generated",today.toLocaleDateString("en-GB")]);
+
+csv.push([""]);
+
+csv.push(["Report","Status"]);
+
+csv.push(["Analytics Report","Ready"]);
+csv.push(["Enquiries Report","Ready"]);
+csv.push(["Care Report","Ready"]);
+csv.push(["Recruitment Report","Ready"]);
+csv.push(["Marketing Report","Ready"]);
+csv.push(["Reputation Report","Ready"]);
+
+let csvContent =
+csv.map(e=>e.join(",")).join("\n");
+
+let blob =
+new Blob([csvContent],{
+type:"text/csv;charset=utf-8;"
+});
+
+let link =
+document.createElement("a");
+
+link.href =
+URL.createObjectURL(blob);
+
+link.download =
+"Heritage_Healthcare_Reports.csv";
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+});
+
+// ===========================
+// PDF Export
+// ===========================
+
+document.getElementById("pdfBtn").addEventListener("click",function(){
+
+window.print();
+
+});
+
+// ===========================
+// Email Report
+// ===========================
+
+document.getElementById("emailBtn").addEventListener("click",function(){
+
+alert("The latest report has been queued for email delivery.");
+
+});
+
+// ===========================
+// Office Report Generator
+// ===========================
+
+document.querySelectorAll("button").forEach(function(btn){
+
+btn.addEventListener("mouseenter",function(){
+
+this.style.opacity=".9";
+
+});
+
+btn.addEventListener("mouseleave",function(){
+
+this.style.opacity="1";
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>
