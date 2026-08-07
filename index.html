@@ -1,374 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Heritage Healthcare CRM</title>
+<title>Heritage Healthcare CRM | Login</title>
 
-<link rel="icon" href="branding/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
 }
 
 body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#003D73 0%,#005C99 50%,#0077C8 100%);
-overflow:hidden;
-}
 
-body::before{
-content:"";
-position:absolute;
-width:700px;
-height:700px;
-background:rgba(255,255,255,.05);
-border-radius:50%;
-top:-220px;
-left:-220px;
-}
+    background:#f4f6f9;
 
-body::after{
-content:"";
-position:absolute;
-width:650px;
-height:650px;
-background:rgba(255,255,255,.05);
-border-radius:50%;
-bottom:-200px;
-right:-170px;
-}
+    display:flex;
 
-.login-card{
+    justify-content:center;
 
-position:relative;
+    align-items:center;
 
-z-index:10;
-
-width:470px;
-
-background:#fff;
-
-border-radius:22px;
-
-padding:45px;
-
-box-shadow:0 35px 80px rgba(0,0,0,.28);
-
-animation:fadeIn .5s ease;
+    min-height:100vh;
 
 }
 
-@keyframes fadeIn{
+.login-container{
 
-from{
-opacity:0;
-transform:translateY(25px);
-}
+    width:100%;
+    max-width:450px;
 
-to{
-opacity:1;
-transform:translateY(0);
-}
+    background:#fff;
+
+    border-radius:15px;
+
+    padding:40px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
 
 }
 
 .logo{
 
-text-align:center;
+    display:block;
 
-margin-bottom:35px;
+    width:190px;
 
-}
-
-.logo img{
-
-width:220px;
-
-margin-bottom:20px;
+    margin:0 auto 25px;
 
 }
 
-.logo h1{
+h1{
 
-font-size:30px;
+    font-size:26px;
 
-color:#004B8D;
+    color:#183153;
 
-margin-bottom:10px;
+    text-align:center;
 
-}
-
-.logo p{
-
-font-size:15px;
-
-color:#666;
-
-line-height:1.6;
+    margin-bottom:10px;
 
 }
 
-.portal{
+.subtitle{
 
-margin-top:18px;
+    text-align:center;
 
-display:inline-block;
+    color:#666;
 
-padding:8px 18px;
+    font-size:14px;
 
-background:#EAF5FC;
-
-color:#004B8D;
-
-border-radius:30px;
-
-font-size:13px;
-
-font-weight:600;
+    margin-bottom:35px;
 
 }
 
-.input-group{
+label{
 
-margin-top:22px;
+    display:block;
 
-}
+    font-size:14px;
 
-.input-group label{
+    font-weight:600;
 
-display:block;
+    margin-bottom:8px;
 
-font-size:14px;
-
-font-weight:600;
-
-margin-bottom:8px;
-
-color:#444;
+    color:#183153;
 
 }
 
-.input-group input{
+input{
 
-width:100%;
+    width:100%;
 
-padding:15px;
+    padding:14px;
 
-border:1px solid #D6D6D6;
+    border:1px solid #d8d8d8;
 
-border-radius:10px;
+    border-radius:8px;
 
-font-size:15px;
+    margin-bottom:20px;
 
-transition:.25s;
+    font-size:15px;
+
+    transition:.2s;
 
 }
 
-.input-group input:focus{
+input:focus{
 
-outline:none;
+    outline:none;
 
-border-color:#0077C8;
-
-box-shadow:0 0 0 4px rgba(0,119,200,.15);
+    border-color:#0094d8;
 
 }
 
 .options{
 
-margin-top:18px;
+    display:flex;
 
-display:flex;
+    justify-content:space-between;
 
-justify-content:space-between;
+    align-items:center;
 
-align-items:center;
+    margin-bottom:25px;
 
-font-size:14px;
-
-}
-
-.options a{
-
-text-decoration:none;
-
-color:#0077C8;
-
-font-weight:500;
+    font-size:14px;
 
 }
 
 .options label{
 
-display:flex;
+    margin:0;
 
-align-items:center;
+    display:flex;
 
-gap:8px;
+    align-items:center;
+
+    gap:8px;
+
+    font-weight:400;
+
+}
+
+.options input{
+
+    width:auto;
+
+    margin:0;
+
+}
+
+.options a{
+
+    text-decoration:none;
+
+    color:#0094d8;
+
+}
+
+.options a:hover{
+
+    text-decoration:underline;
 
 }
 
 button{
 
-width:100%;
+    width:100%;
 
-padding:16px;
+    padding:15px;
 
-margin-top:30px;
+    background:#0094d8;
 
-background:#0077C8;
+    color:#fff;
 
-color:white;
+    border:none;
 
-border:none;
+    border-radius:8px;
 
-border-radius:10px;
+    font-size:16px;
 
-font-size:16px;
+    font-weight:600;
 
-font-weight:600;
+    cursor:pointer;
 
-cursor:pointer;
-
-transition:.3s;
+    transition:.3s;
 
 }
 
 button:hover{
 
-background:#005F9E;
-
-transform:translateY(-2px);
+    background:#007db8;
 
 }
 
 #error{
 
-display:none;
+    display:none;
 
-margin-top:20px;
+    margin-top:20px;
 
-padding:14px;
+    padding:12px;
 
-background:#FFE7E7;
+    border-radius:8px;
 
-color:#B00020;
+    background:#ffe9e9;
 
-border-radius:10px;
+    color:#b00020;
 
-text-align:center;
-
-font-size:14px;
+    text-align:center;
 
 }
 
-.demo{
+#loading{
 
-margin-top:30px;
+    display:none;
 
-padding:20px;
+    text-align:center;
 
-background:#F7FAFD;
-
-border-radius:12px;
-
-border:1px solid #E4EEF6;
+    margin-top:20px;
 
 }
 
-.demo h3{
+.spinner{
 
-font-size:16px;
+    width:40px;
 
-color:#004B8D;
+    height:40px;
 
-margin-bottom:15px;
+    border:4px solid #ddd;
 
-}
+    border-top:4px solid #0094d8;
 
-.demo table{
+    border-radius:50%;
 
-width:100%;
+    animation:spin 1s linear infinite;
 
-border-collapse:collapse;
-
-font-size:13px;
+    margin:0 auto 10px;
 
 }
 
-.demo th{
+@keyframes spin{
 
-background:#004B8D;
+    from{
 
-color:white;
+        transform:rotate(0deg);
 
-padding:8px;
+    }
 
-}
+    to{
 
-.demo td{
+        transform:rotate(360deg);
 
-padding:8px;
-
-border-bottom:1px solid #E8E8E8;
+    }
 
 }
 
 .footer{
 
-margin-top:25px;
+    text-align:center;
 
-text-align:center;
+    margin-top:40px;
 
-font-size:13px;
+    font-size:13px;
 
-color:#888;
-
-line-height:1.7;
+    color:#888;
 
 }
 
-@media(max-width:600px){
+.version{
 
-.login-card{
-
-width:92%;
-
-padding:35px;
-
-}
-
-.logo img{
-
-width:180px;
-
-}
-
-.logo h1{
-
-font-size:25px;
-
-}
-
-.demo{
-
-display:none;
-
-}
+    margin-bottom:8px;
 
 }
 
@@ -378,40 +291,24 @@ display:none;
 
 <body>
 
-<div class="login-card">
+<div class="login-container">
 
-<div class="logo">
+<img src="branding/logo.jpg" class="logo" alt="Heritage Healthcare">
 
-<img src="branding/logo.jpg" alt="Heritage Healthcare">
+<h1>Welcome Back</h1>
 
-<h1>Heritage Healthcare CRM</h1>
+<p class="subtitle">
 
-<p>
-
-Secure access for Head Office and Franchise users.
+Secure access for Head Office and Franchise users
 
 </p>
-
-<span class="portal">
-
-Role-Based Login Portal
-
-</span>
-
-</div>
-
-<div class="input-group">
 
 <label>Email Address</label>
 
 <input
 type="email"
 id="email"
-placeholder="name@heritagehealthcare.co.uk">
-
-</div>
-
-<div class="input-group">
+placeholder="Enter your email">
 
 <label>Password</label>
 
@@ -420,23 +317,19 @@ type="password"
 id="password"
 placeholder="Enter your password">
 
-</div>
-
 <div class="options">
 
 <label>
 
-<input type="checkbox">
+<input
+type="checkbox"
+id="remember">
 
-Remember me
+Remember Me
 
 </label>
 
-<a href="#">
-
-Forgot password?
-
-</a>
+<a href="#">Forgot Password?</a>
 
 </div>
 
@@ -446,74 +339,51 @@ Sign In
 
 </button>
 
+<div id="loading">
+
+<div class="spinner"></div>
+
+Signing you in...
+
+</div>
+
 <div id="error">
 
 Incorrect email address or password.
 
 </div>
 
-<div class="demo">
-
-<h3>Example User Accounts</h3>
-
-<table>
-
-<tr>
-
-<th>Role</th>
-
-<th>Portal</th>
-
-</tr>
-
-<tr>
-
-<td>Head Office</td>
-
-<td>Full CRM Access</td>
-
-</tr>
-
-<tr>
-
-<td>Franchise</td>
-
-<td>Office CRM Access</td>
-
-</tr>
-
-</table>
-
-</div>
-
 <div class="footer">
 
-Version 2.0<br>
+<div class="version">
 
-© 2026 Heritage Healthcare CRM<br>
+Version 2.0
 
-Role-Based Access System
+</div>
+
+© 2026 Heritage Healthcare CRM
 
 </div>
 
 </div>
-<script>
 
+<!-- =======================================
+Firebase Login Script
+Part 2 starts here
+======================================= -->
+
+<script type="module">
 // =========================================
-// Heritage Healthcare CRM
-// Firebase Authentication Login
+// Firebase Imports
 // =========================================
 
-// Firebase SDK Imports
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { auth, db } from "./firebase.js";
 
 import {
-    getAuth,
     signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
-    getFirestore,
     collection,
     query,
     where,
@@ -522,41 +392,17 @@ import {
 
 
 // =========================================
-// YOUR FIREBASE CONFIG
-// Replace this with your own config
-// =========================================
-
-const firebaseConfig = {
-
-    apiKey: "YOUR_API_KEY",
-
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-
-    projectId: "YOUR_PROJECT_ID",
-
-    storageBucket: "YOUR_PROJECT.appspot.com",
-
-    messagingSenderId: "YOUR_SENDER_ID",
-
-    appId: "YOUR_APP_ID"
-
-};
-
-
-// Initialise Firebase
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-
-// =========================================
-// Login
+// Login Function
 // =========================================
 
 async function login(){
+
+    // Hide previous messages
+
+    document.getElementById("error").style.display="none";
+
+    document.getElementById("loading").style.display="block";
+
 
     const email =
     document.getElementById("email")
@@ -568,18 +414,27 @@ async function login(){
     document.getElementById("password")
     .value;
 
+
     try{
 
-        // Sign into Firebase
+        // ===================================
+        // Authenticate with Firebase
+        // ===================================
 
-        const result =
         await signInWithEmailAndPassword(
+
             auth,
+
             email,
+
             password
+
         );
 
-        // Find this user in Firestore
+
+        // ===================================
+        // Find User Record
+        // ===================================
 
         const q = query(
 
@@ -592,40 +447,120 @@ async function login(){
         const snapshot =
         await getDocs(q);
 
+
         if(snapshot.empty){
 
-            alert("User profile not found.");
-
-            return;
+            throw new Error(
+                "User profile not found."
+            );
 
         }
+
 
         const user =
         snapshot.docs[0].data();
 
-        // Store session
 
-        localStorage.setItem("loggedIn","true");
+        // ===================================
+        // Check User Active
+        // ===================================
 
-        localStorage.setItem("userEmail",user.email);
+        if(user.active===false){
 
-        localStorage.setItem("userName",user.name);
+            throw new Error(
+                "This account has been disabled."
+            );
 
-        localStorage.setItem("role",user.role);
+        }
 
-        localStorage.setItem("office",user.office);
 
-        localStorage.setItem("lastLogin",
-        new Date().toLocaleString("en-GB"));
+        // ===================================
+        // Save Session
+        // ===================================
 
-        // Redirect
+        localStorage.setItem(
+
+            "loggedIn",
+
+            "true"
+
+        );
+
+        localStorage.setItem(
+
+            "userEmail",
+
+            user.email
+
+        );
+
+        localStorage.setItem(
+
+            "userName",
+
+            user.name
+
+        );
+
+        localStorage.setItem(
+
+            "office",
+
+            user.office
+
+        );
+
+        localStorage.setItem(
+
+            "role",
+
+            user.role
+
+        );
+
+        localStorage.setItem(
+
+            "lastLogin",
+
+            new Date().toLocaleString("en-GB")
+
+        );
+
+
+        // ===================================
+        // Remember Me
+        // ===================================
+
+        if(document.getElementById("remember").checked){
+
+            localStorage.setItem(
+
+                "rememberEmail",
+
+                email
+
+            );
+
+        }else{
+
+            localStorage.removeItem(
+
+                "rememberEmail"
+
+            );
+
+        }
+
+
+        // ===================================
+        // Redirect User
+        // ===================================
 
         if(user.role==="admin"){
 
             window.location.href="home.html";
 
-        }
-        else{
+        }else{
 
             window.location.href="franchise_home.html";
 
@@ -635,15 +570,15 @@ async function login(){
 
     catch(error){
 
-        console.log(error);
+        console.error(error);
+
+        document.getElementById("loading").style.display="none";
 
         document.getElementById("error").style.display="block";
 
     }
 
 }
-
-
 // =========================================
 // Press Enter to Login
 // =========================================
@@ -660,27 +595,66 @@ document.addEventListener("keydown",function(e){
 
 
 // =========================================
-// Auto Redirect
+// Remember Me
 // =========================================
 
-if(localStorage.getItem("loggedIn")==="true"){
+const rememberedEmail =
+localStorage.getItem("rememberEmail");
 
-    const role =
-    localStorage.getItem("role");
+if(rememberedEmail){
+
+    document.getElementById("email").value =
+    rememberedEmail;
+
+    document.getElementById("remember").checked = true;
+
+}
+
+
+// =========================================
+// Check Existing Login
+// =========================================
+
+const loggedIn =
+localStorage.getItem("loggedIn");
+
+const role =
+localStorage.getItem("role");
+
+if(loggedIn==="true"){
 
     if(role==="admin"){
 
         window.location.href="home.html";
 
     }
-    else{
+
+    if(role==="franchise"){
 
         window.location.href="franchise_home.html";
 
     }
 
 }
-    
+
+
+// =========================================
+// Logout Function
+// =========================================
+
+window.logout=function(){
+
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("office");
+    localStorage.removeItem("role");
+    localStorage.removeItem("lastLogin");
+
+    window.location.href="index.html";
+
+}
+
 </script>
 
 </body>
