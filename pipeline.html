@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sales Pipeline | Heritage Healthcare CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#183153;--blue:#0094d8;--blue2:#0079b4;--bg:#f4f7fb;--muted:#6b7280;--border:#e1e7ee}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
+body{background:var(--bg);color:var(--navy);min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;background:var(--navy);padding:28px 18px;z-index:20}
+.sidebar img{width:175px;display:block;margin:0 auto 38px}
+.sidebar a{display:block;color:#fff;text-decoration:none;padding:13px 15px;border-radius:9px;margin-bottom:8px;font-weight:600}
+.sidebar a:hover,.sidebar a.active{background:var(--blue)}
+.logout{width:100%;margin-top:25px;padding:12px;border-radius:9px;border:1px solid #ffffff40;background:transparent;color:white}
+.main{margin-left:260px;padding:34px;min-height:100vh}
+.topbar{background:#fff;border-radius:14px;padding:18px 22px;box-shadow:0 10px 30px #18315314;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center}
+.user{font-weight:700}.meta,.muted{color:var(--muted);font-size:13px;margin-top:4px}
+.page-title{margin-bottom:24px}.page-title h1{font-size:32px}.page-title p{color:var(--muted);margin-top:6px}
+.btn{border:0;border-radius:9px;padding:12px 18px;font-weight:700}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:1px solid var(--border);color:var(--navy)}
+@media(max-width:760px){.sidebar{position:static;width:100%;height:auto}.main{margin-left:0;padding:18px}.topbar{align-items:flex-start;gap:12px}}
+</style></head><body>
+<aside class="sidebar"><img src="branding/logo-white.png" alt="Heritage Healthcare"><nav><a class="" href="franchise_home.html">🏠 Dashboard</a><a class="active" href="pipeline.html">📥 Pipeline</a><a class="" href="analytics.html">📊 Analytics</a><a class="" href="reports.html">📄 Reports</a><a class="" href="notifications.html">🔔 Notifications</a></nav><button class="logout" id="logoutBtn">Log out</button></aside>
+<main class="main"><div class="topbar"><div><div class="user" id="welcome">Sales Pipeline</div><div class="meta" id="officeMeta">Loading...</div></div><button class="btn primary" onclick="location.href='new_enquiry.html'">+ New Enquiry</button></div>
+<div class="page-title"><h1>Sales Pipeline</h1><p>Track enquiries through the six-stage CRM process.</p></div>
+<div id="stats" style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px"></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"><input id="search" placeholder="Search name, phone or email" style="flex:1;min-width:240px;padding:13px;border:1px solid #e1e7ee;border-radius:9px"><select id="serviceFilter" style="padding:13px;border:1px solid #e1e7ee;border-radius:9px"><option>All Services</option><option>Domiciliary Care</option><option>Live-in Care</option><option>Dementia Care</option><option>Companionship</option><option>Hospital to Home</option><option>Respite Care</option><option>Palliative Care</option><option>End of Life Care</option><option>Learning Disabilities</option><option>Complex Care</option></select><select id="sortBy" style="padding:13px;border:1px solid #e1e7ee;border-radius:9px"><option value="new">Newest First</option><option value="old">Oldest First</option><option value="az">Name A-Z</option><option value="za">Name Z-A</option></select><button class="btn secondary" id="export">Export CSV</button></div>
+<div id="board" style="display:flex;gap:15px;overflow:auto;padding-bottom:20px"></div>
+<div id="backdrop" style="display:none;position:fixed;inset:0;background:#0005;z-index:30"><section style="position:absolute;right:0;top:0;width:min(520px,100%);height:100%;background:#fff;padding:25px;overflow:auto">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Edit Enquiry</h2><button id="close" class="btn secondary">×</button></div>
+<form id="editForm" style="margin-top:20px;display:grid;gap:13px">
+<input type="hidden" id="editId"><label>First Name<input id="efn" required></label><label>Last Name<input id="eln" required></label><label>Telephone<input id="ephone" required></label><label>Email<input id="eemail"></label>
+<label>Service<select id="eservice"><option>Domiciliary Care</option><option>Live-in Care</option><option>Dementia Care</option><option>Companionship</option><option>Hospital to Home</option><option>Respite Care</option><option>Palliative Care</option><option>End of Life Care</option><option>Learning Disabilities</option><option>Complex Care</option></select></label>
+<label>Status<select id="estatus"><option>New</option><option>Contacted</option><option>Contact in Future</option><option>Closed - Won</option><option>Closed - Lost</option><option>Junk Lead</option></select></label>
+<label>Priority<select id="epriority"><option>Low</option><option>Normal</option><option>High</option><option>Urgent</option></select></label><label>Assigned To<input id="eassigned"></label>
+<label>Address<textarea id="eaddress"></textarea></label><label>Postcode<input id="epostcode"></label><label>Notes<textarea id="enotes"></textarea></label>
+<button class="btn primary">Save Changes</button></form></section></div></main>
+<script type="module">
+import {auth} from "./firebase.js";
+import {signOut} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+document.getElementById("logoutBtn").onclick=async()=>{await signOut(auth);location.replace("index.html")};
+import {db} from "./firebase.js";
+import {onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {doc,getDoc,collection,query,where,onSnapshot,updateDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+const statuses=["New","Contacted","Contact in Future","Closed - Won","Closed - Lost","Junk Lead"];let profile,rows=[];
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+const name=e=>(e.firstName+" "+e.lastName).trim()||"Unnamed enquiry";
+const millis=v=>v?.toMillis?v.toMillis():v?.seconds?v.seconds*1000:0;
+onAuthStateChanged(auth,async u=>{
+ if(!u){location.replace("index.html");return}
+ const s=await getDoc(doc(db,"users",u.uid));if(!s.exists())return;profile={...s.data(),email:u.email};
+ welcome.textContent="Sales Pipeline • "+(profile.name||u.email);officeMeta.textContent=profile.role==="admin"?"Head Office • All Offices":profile.office;
+ const q=profile.role==="admin"?query(collection(db,"enquiries")):query(collection(db,"enquiries"),where("office","==",profile.office));
+ onSnapshot(q,snap=>{rows=snap.docs.map(d=>({id:d.id,...d.data()}));render()},err=>{console.error(err);alert("Unable to load enquiries. Check Firestore Rules.")});
+});
+search.oninput=render;serviceFilter.onchange=render;sortBy.onchange=render;
+function render(){
+ const term=search.value.toLowerCase().trim(),svc=serviceFilter.value;
+ let data=rows.filter(e=>(!term||[name(e),e.phone,e.email].join(" ").toLowerCase().includes(term))&&(svc==="All Services"||e.service===svc));
+ const sort=sortBy.value;data.sort((a,b)=>sort==="az"?name(a).localeCompare(name(b)):sort==="za"?name(b).localeCompare(name(a)):sort==="old"?millis(a.created)-millis(b.created):millis(b.created)-millis(a.created));
+ const counts=Object.fromEntries(statuses.map(s=>[s,0]));data.forEach(e=>counts[statuses.includes(e.status)?e.status:"New"]++);
+ stats.innerHTML=[["Active Enquiries",data.filter(e=>!["Closed - Won","Closed - Lost","Junk Lead"].includes(e.status)).length],["New",counts.New],["Contacted",counts.Contacted],["Won",counts["Closed - Won"]],["Lost",counts["Closed - Lost"]],["Conversion",((counts["Closed - Won"]/(counts["Closed - Won"]+counts["Closed - Lost"]||1))*100).toFixed(0)+"%"]].map(x=>`<div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 5px 18px #18315310"><small>${x[0]}</small><strong style="display:block;font-size:25px;margin-top:5px">${x[1]}</strong></div>`).join("");
+ board.innerHTML=statuses.map(s=>`<div data-status="${esc(s)}" class="col" style="min-width:310px;background:#eaf0f5;border-radius:12px;padding:0 10px 12px"><div style="padding:14px;font-weight:700;display:flex;justify-content:space-between">${esc(s)} <span>${counts[s]}</span></div><div class="drop" data-status="${esc(s)}" style="min-height:380px">${data.filter(e=>(statuses.includes(e.status)?e.status:"New")===s).map(card).join("")}</div></div>`).join("");
+ document.querySelectorAll(".drop").forEach(z=>{z.ondragover=e=>e.preventDefault();z.ondrop=drop});
+ document.querySelectorAll(".enq").forEach(c=>c.ondragstart=e=>e.dataTransfer.setData("id",c.dataset.id));
+ document.querySelectorAll(".view").forEach(b=>b.onclick=()=>openEdit(b.dataset.id));
+}
+function card(e){return `<article class="enq" draggable="true" data-id="${e.id}" style="background:#fff;padding:14px;margin-bottom:10px;border-radius:10px;box-shadow:0 4px 12px #0000000d"><h3 style="font-size:16px">${esc(name(e))}</h3><p style="font-size:13px;color:#666;margin-top:6px">📞 ${esc(e.phone)}</p><p style="font-size:13px;color:#666">✉️ ${esc(e.email||"No email")}</p><p style="font-size:12px;margin-top:8px">${esc(e.service||"")}</p><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><small>${esc(e.priority||"Normal")}</small><button class="view btn secondary" data-id="${e.id}" type="button">View / Edit</button></div></article>`}
+async function drop(e){e.preventDefault();const id=e.dataTransfer.getData("id"),status=e.currentTarget.dataset.status;if(!id)return;try{await updateDoc(doc(db,"enquiries",id),{status,updated:serverTimestamp(),lastEditedBy:profile.email})}catch(err){console.error(err);alert("Could not update the enquiry.")}}
+function openEdit(id){const e=rows.find(x=>x.id===id);if(!e)return;editId.value=id;efn.value=e.firstName||"";eln.value=e.lastName||"";ephone.value=e.phone||"";eemail.value=e.email||"";eservice.value=e.service||"Domiciliary Care";estatus.value=e.status||"New";epriority.value=e.priority||"Normal";eassigned.value=e.assignedTo||"";eaddress.value=e.address||"";epostcode.value=e.postcode||"";enotes.value=e.notes||"";backdrop.style.display="block"}
+close.onclick=()=>backdrop.style.display="none";
+editForm.onsubmit=async e=>{e.preventDefault();const id=editId.value;try{await updateDoc(doc(db,"enquiries",id),{firstName:efn.value.trim(),lastName:eln.value.trim(),phone:ephone.value.trim(),email:eemail.value.trim(),service:eservice.value,status:estatus.value,priority:epriority.value,assignedTo:eassigned.value.trim(),address:eaddress.value.trim(),postcode:epostcode.value.trim(),notes:enotes.value.trim(),updated:serverTimestamp(),lastEditedBy:profile.email});backdrop.style.display="none"}catch(err){console.error(err);alert("Could not save changes.")}};
+export.onclick=()=>{const csv=[["Name","Phone","Email","Office","Service","Status","Priority","Assigned To"],...rows.map(e=>[name(e),e.phone,e.email,e.office,e.service,e.status,e.priority,e.assignedTo])].map(r=>r.map(v=>`"${String(v??"").replaceAll('"','""')}"`).join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="heritage-healthcare-enquiries.csv";a.click()};
+
+</script></body></html>

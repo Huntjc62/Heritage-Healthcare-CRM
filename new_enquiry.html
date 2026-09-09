@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>New Enquiry | Heritage Healthcare CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#183153;--blue:#0094d8;--blue2:#0079b4;--bg:#f4f7fb;--muted:#6b7280;--border:#e1e7ee}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
+body{background:var(--bg);color:var(--navy);min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;background:var(--navy);padding:28px 18px;z-index:20}
+.sidebar img{width:175px;display:block;margin:0 auto 38px}
+.sidebar a{display:block;color:#fff;text-decoration:none;padding:13px 15px;border-radius:9px;margin-bottom:8px;font-weight:600}
+.sidebar a:hover,.sidebar a.active{background:var(--blue)}
+.logout{width:100%;margin-top:25px;padding:12px;border-radius:9px;border:1px solid #ffffff40;background:transparent;color:white}
+.main{margin-left:260px;padding:34px;min-height:100vh}
+.topbar{background:#fff;border-radius:14px;padding:18px 22px;box-shadow:0 10px 30px #18315314;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center}
+.user{font-weight:700}.meta,.muted{color:var(--muted);font-size:13px;margin-top:4px}
+.page-title{margin-bottom:24px}.page-title h1{font-size:32px}.page-title p{color:var(--muted);margin-top:6px}
+.btn{border:0;border-radius:9px;padding:12px 18px;font-weight:700}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:1px solid var(--border);color:var(--navy)}
+@media(max-width:760px){.sidebar{position:static;width:100%;height:auto}.main{margin-left:0;padding:18px}.topbar{align-items:flex-start;gap:12px}}
+</style></head><body>
+<aside class="sidebar"><img src="branding/logo-white.png" alt="Heritage Healthcare"><nav><a class="" href="franchise_home.html">🏠 Dashboard</a><a class="active" href="pipeline.html">📥 Pipeline</a><a class="" href="analytics.html">📊 Analytics</a><a class="" href="reports.html">📄 Reports</a><a class="" href="notifications.html">🔔 Notifications</a></nav><button class="logout" id="logoutBtn">Log out</button></aside>
+<main class="main"><div class="topbar"><div><div class="user" id="welcome">Create Enquiry</div><div class="meta" id="officeMeta">Loading...</div></div></div>
+<div class="page-title"><h1>Create New Enquiry</h1><p>Add a new enquiry to the correct office pipeline.</p></div>
+<form id="form" style="background:#fff;padding:30px;border-radius:14px;box-shadow:0 10px 30px #18315314">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px">
+<label>First Name *<input id="firstName" required></label><label>Last Name *<input id="lastName" required></label>
+<label>Telephone *<input id="phone" required></label><label>Email<input id="email" type="email"></label>
+<label>Address<textarea id="address"></textarea></label><label>Postcode<input id="postcode"></label>
+<label>Service Required *<select id="service" required><option value="">Select a service</option><option>Domiciliary Care</option><option>Live-in Care</option><option>Dementia Care</option><option>Companionship</option><option>Hospital to Home</option><option>Respite Care</option><option>Palliative Care</option><option>End of Life Care</option><option>Learning Disabilities</option><option>Complex Care</option></select></label>
+<label>Referral Source<select id="referral"><option>Website</option><option>Google</option><option>Facebook</option><option>Family / Friend</option><option>Health Professional</option><option>Hospital</option><option>Social Services</option><option>Care Home</option><option>Existing Client</option><option>Other</option></select></label>
+<label>Priority<select id="priority"><option>Low</option><option selected>Normal</option><option>High</option><option>Urgent</option></select></label>
+<label>Current Status<select id="status"><option>New</option><option>Contacted</option><option>Contact in Future</option><option>Closed - Won</option><option>Closed - Lost</option><option>Junk Lead</option></select></label>
+<label style="grid-column:1/-1">Office<div id="office" style="padding:13px;background:#eef7fc;border:1px solid #b9dff4;border-radius:8px;font-weight:700">Loading...</div></label>
+<label style="grid-column:1/-1">Additional Notes<textarea id="notes"></textarea></label>
+<label style="grid-column:1/-1">Assigned To<input id="assignedTo" placeholder="Leave blank to assign later"></label>
+</div><div style="display:flex;justify-content:flex-end;gap:10px;margin-top:25px"><button type="button" class="btn secondary" id="cancel">Cancel</button><button class="btn primary" id="save">Save Enquiry</button></div>
+</form></main>
+<script type="module">
+import {auth} from "./firebase.js";
+import {signOut} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+document.getElementById("logoutBtn").onclick=async()=>{await signOut(auth);location.replace("index.html")};
+import {db} from "./firebase.js";
+import {onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {doc,getDoc,collection,addDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+let profile=null;
+onAuthStateChanged(auth,async user=>{
+ if(!user){location.replace("index.html");return}
+ const s=await getDoc(doc(db,"users",user.uid));if(!s.exists()){await signOut(auth);return}
+ profile={...s.data(),email:user.email};
+ if(profile.active===false){await signOut(auth);return}
+ const officeName=profile.role==="admin"?"All Offices":profile.office;
+ office.textContent=officeName;officeMeta.textContent=profile.role==="admin"?"Head Office • All Offices":profile.office;welcome.textContent="Create Enquiry • "+(profile.name||user.email);
+});
+cancel.onclick=()=>location.replace("pipeline.html");
+form.onsubmit=async e=>{
+ e.preventDefault();if(!profile)return;
+ save.disabled=true;save.textContent="Saving...";
+ try{
+  const officeName=profile.role==="admin"?"All Offices":profile.office;
+  await addDoc(collection(db,"enquiries"),{
+   firstName:firstName.value.trim(),lastName:lastName.value.trim(),phone:phone.value.trim(),email:email.value.trim(),
+   address:address.value.trim(),postcode:postcode.value.trim(),office:officeName,service:service.value,
+   referralSource:referral.value,priority:priority.value,status:status.value,notes:notes.value.trim(),
+   assignedTo:assignedTo.value.trim(),created:serverTimestamp(),updated:serverTimestamp(),
+   createdBy:profile.email,lastEditedBy:profile.email,active:true
+  });
+  location.replace("pipeline.html");
+ }catch(err){console.error(err);alert("There was an error saving the enquiry. Check Firebase Authentication, the user profile and Firestore Rules.");save.disabled=false;save.textContent="Save Enquiry"}
+};
+</script></body></html>
