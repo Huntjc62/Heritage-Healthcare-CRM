@@ -37,11 +37,9 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 </div><div style="display:flex;justify-content:flex-end;gap:10px;margin-top:25px"><button type="button" class="btn secondary" id="cancel">Cancel</button><button class="btn primary" id="save">Save Enquiry</button></div>
 </form></main>
 <script type="module">
-import {auth} from "./firebase.js";
-import {signOut} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-document.getElementById("logoutBtn").onclick=async()=>{await signOut(auth);location.replace("index.html")};
-import {db} from "./firebase.js";
+import {auth,db} from "./firebase.js";
 import {onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+document.getElementById("logoutBtn").onclick=async()=>{await signOut(auth);location.replace("index.html")};
 import {doc,getDoc,collection,addDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 let profile=null;
 onAuthStateChanged(auth,async user=>{
